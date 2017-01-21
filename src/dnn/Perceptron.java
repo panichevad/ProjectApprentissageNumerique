@@ -16,10 +16,10 @@ public class Perceptron {
 
     Perceptron(int _nL, int _n, int _k){
 
-        this.input = new Layer(_k, _n);
-        this.output = new Layer(_k, _n);
+        this.input = new Layer(_n);
+        this.output = new Layer(_n);
         for (int i = 0; i < _nL; i++) {
-            hidden.add(new Layer(_k, _n));
+            hidden.add(new Layer(_n));
         }
     }
 
