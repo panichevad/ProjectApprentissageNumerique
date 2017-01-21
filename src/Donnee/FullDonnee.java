@@ -4,12 +4,14 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Locale;
 import java.util.Scanner;
 
 public class FullDonnee {
 	
 	protected ArrayList<IrisDonnee> donnee = new ArrayList<IrisDonnee>(150);
+	protected HashMap<String, Integer> classe = new HashMap<>();
 	
 	public FullDonnee(){
 		this.ReadIris();
@@ -21,6 +23,7 @@ public class FullDonnee {
 			File source = new File("iris.data");
 			BufferedReader in = new BufferedReader(new FileReader(source));
 			String ligne = in.readLine();
+			int i = 0;
 			while (ligne != null) {
 				Scanner rl = new Scanner(ligne);
 				rl.useLocale(Locale.US);
@@ -28,6 +31,10 @@ public class FullDonnee {
 				double sepalLength = rl.nextDouble(), sepalWidth = rl.nextDouble(), petalLength = rl.nextDouble(),
 						petalWidth = rl.nextDouble();
 				String classe = rl.next();
+				if(!this.classe.containsKey(classe)){
+					this.classe.put(classe,i);
+					i++;
+				}
 				double[] tmp = new double[4];
 				tmp[0] = sepalLength;
 				tmp[1] = sepalWidth;
@@ -46,6 +53,12 @@ public class FullDonnee {
 	public ArrayList<IrisDonnee> getDonnee() {
 		return donnee;
 	}
+
+	public HashMap<String, Integer> getClasse() {
+		return classe;
+	}
+	
+	
 	
 	
 
