@@ -13,13 +13,14 @@ public class Layer {
     protected ArrayList<Neurone> neurone ;
 
     Layer(int _n){
-    	this.n = n;
+    	this.n = _n;
     	this.neurone = new ArrayList<Neurone>(n);
     }
 
 	public ArrayList<Neurone> getNeurone() {
 		return neurone;
 	}
+	
     
     
 
