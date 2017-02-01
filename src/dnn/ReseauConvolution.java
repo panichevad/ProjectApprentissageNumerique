@@ -24,8 +24,8 @@ public class ReseauConvolution {
     protected ArrayList<IrisDonnee> donneeIrisfiltre;
     protected String OuputAttendu;
 
-    public ReseauConvolution(int _nL, int _n, int _k){
-    	this.donneeIris = new FullDonnee();
+    public ReseauConvolution(int _nL, int _n, int _k, String nomfichier){
+    	this.donneeIris = new FullDonnee(nomfichier);
     	this.donneeIrisfiltre = new ArrayList<IrisDonnee>(this.donneeIris.getDonnee().size());
         this.input = new Layer(_n);
         this.nL = _nL;
@@ -192,7 +192,7 @@ public class ReseauConvolution {
 	 }
 	 
 	 public static void main(String[] args) {
-		 ReseauConvolution test = new ReseauConvolution(3, 2, 2);
+		 ReseauConvolution test = new ReseauConvolution(3, 2, 2,"iris.data");
 	 }
     
     
