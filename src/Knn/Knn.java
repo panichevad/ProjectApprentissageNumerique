@@ -15,7 +15,7 @@ public class Knn {
 		// On récupère les données
 		this.donnee = new FullDonnee(nom);
 		// On lance l'algo
-		System.out.println(this.algorithme());
+		System.out.println(this.algorithme(1,8));
 
 	}
 
@@ -71,7 +71,7 @@ public class Knn {
 		return valeur;
 	}
 
-	public int algorithme() {
+	public int algorithme(int PetitK, int GrandK) {
 		// Créer les 5 blocs ici
 		ArrayList<IrisDonnee> copie = new ArrayList<>(this.donnee.getDonnee());
 		IrisDonnee[][] bloc = new IrisDonnee[4][52];
@@ -86,11 +86,11 @@ public class Knn {
 
 		// calcul des distances
 
-		int[] erreur = new int[6];
+		int[] erreur = new int[GrandK - PetitK + 1];
 		for (int t = 0; t < 4; t++) {
 			for (int v = 0; v < 4; v++) {
 				if (v != t) {
-					for (int k = 3; k < 9; k++) {
+					for (int k = PetitK; k < GrandK+1; k++) {
 						for (int i = 0; i < 4; i++) {
 							if (i != t && i != v) {
 								for (int j = 0; j < 30; j++) {
@@ -100,7 +100,7 @@ public class Knn {
 									System.out.println(prediction+": PREDICTION "+bloc[t][j].getClasse()+": VraiValeur");
 									if (!bloc[t][j].getClasse().equals(prediction)) {
 										System.out.println("Une Erreur trouvée pour k="+k);
-										erreur[k - 3]++;
+										erreur[k - PetitK]++;
 									}
 								}
 							}
@@ -110,16 +110,16 @@ public class Knn {
 			}
 		}
 		int min = Integer.MAX_VALUE;
-		int meilleurk = 8;
-		for (int i = 0; i < 6; i++) {
-			System.out.println("Nb Erreur sur k = "+(i+3)+" : "+erreur[i]);
+		int meilleurk = GrandK;
+		for (int i = 0; i <GrandK - PetitK + 1 ; i++) {
+			System.out.println("Nb Erreur sur k = "+(i+PetitK)+" : "+erreur[i]);
 			if (erreur[i] <= min) {
 				min = erreur[i];
 				meilleurk = i;
 			}
 		}
 		System.out.println("Le meilleur K est :");
-		return meilleurk + 3;
+		return meilleurk + PetitK ;
 	}
 
 	public static void main(String[] args) {
