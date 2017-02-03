@@ -9,23 +9,22 @@ public class Filter {
 		
 	}
 	
-	/**
-	 * On fait la moyenne des longueurs 1x2
-	 * @param value
-	 * @return la moyenne des longueurs
-	 */
-	public double firstfiltre(double[] value){
-		double result = (value[0]+value[2])/2;
-		return result;
-	}
 	
 	/**
-	 * On fait la moyenne des largeurs 1x2
+	 * On fait la moyenne des valeurs 1x2
 	 * @param value
-	 * @return la moyenne des largeurs
+	 * @return la moyenne des valeurs
 	 */
-	public double secondfiltre(double[] value){
-		double result = (value[1]+value[3])/2;
+	public double[] applicationFiltre(double[] value){
+		double[] result  = new double[value.length];
+		for(int i = 0 ; i<value.length ; i++){
+			if(i==value.length-1){
+				result[i] = (value[i]+value[0])/2;
+			}
+			else{
+				result[i] = (value[i]+value[i+1])/2;
+			}
+		}
 		return result;
 	}
 	

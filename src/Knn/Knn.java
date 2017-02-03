@@ -5,7 +5,7 @@ import java.util.*;
 import javax.swing.plaf.synth.SynthSeparatorUI;
 
 import Donnee.FullDonnee;
-import Donnee.IrisDonnee;
+import Donnee.Donnee;
 
 public class Knn {
 
@@ -34,10 +34,10 @@ public class Knn {
 
 	// Calcul les distances entre 1 point test et les autres points et retourne
 	// les k plus proches voisins
-	public IrisDonnee[] distanceMin(IrisDonnee test, IrisDonnee[] apprentissage, int k) {
+	public Donnee[] distanceMin(Donnee test, Donnee[] apprentissage, int k) {
 		double[] distance = new double[52];
-		HashMap<Double, IrisDonnee> donnee = new HashMap(52);
-		IrisDonnee[] min = new IrisDonnee[k];
+		HashMap<Double, Donnee> donnee = new HashMap(52);
+		Donnee[] min = new Donnee[k];
 		for (int j = 0; j < 52; j++) {
 			distance[j] = distanceManhattan(test.getCoordonnee(), apprentissage[j].getCoordonnee());
 			donnee.put(distance[j], apprentissage[j]);
@@ -49,7 +49,7 @@ public class Knn {
 		return min;
 	}
 
-	public String prediction(IrisDonnee[] prediction) {
+	public String prediction(Donnee[] prediction) {
 		int compteurc1 = 0;
 		int compteurc2 = 0;		
 		String valeur;
@@ -73,8 +73,8 @@ public class Knn {
 
 	public int algorithme(int PetitK, int GrandK) {
 		// Créer les 5 blocs ici
-		ArrayList<IrisDonnee> copie = new ArrayList<>(this.donnee.getDonnee());
-		IrisDonnee[][] bloc = new IrisDonnee[4][52];
+		ArrayList<Donnee> copie = new ArrayList<>(this.donnee.getDonnee());
+		Donnee[][] bloc = new Donnee[4][52];
 		for (int i = 0; i < 4; i++) {
 			for (int j = 0; j < 52; j++) {
 				int rand = (int) (Math.random() * (copie.size() - 1 + 1));
@@ -94,7 +94,7 @@ public class Knn {
 						for (int i = 0; i < 4; i++) {
 							if (i != t && i != v) {
 								for (int j = 0; j < 30; j++) {
-									IrisDonnee[] valeur = new IrisDonnee[k];
+									Donnee[] valeur = new Donnee[k];
 									valeur = distanceMin(bloc[t][j], bloc[i], k);
 									String prediction = prediction(valeur);
 									System.out.println(prediction+": PREDICTION "+bloc[t][j].getClasse()+": VraiValeur");

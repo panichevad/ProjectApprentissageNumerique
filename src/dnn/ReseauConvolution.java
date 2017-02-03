@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Random;
 
 import Donnee.FullDonnee;
-import Donnee.IrisDonnee;
+import Donnee.Donnee;
 
 
 public class ReseauConvolution {
@@ -21,12 +21,12 @@ public class ReseauConvolution {
     protected ArrayList<Layer> hidden; // 3 couches de 2 neurones
     protected Filter filtre;
     protected FullDonnee donneeIris;
-    protected ArrayList<IrisDonnee> donneeIrisfiltre;
+    protected ArrayList<Donnee> donneeIrisfiltre;
     protected String OuputAttendu;
 
     public ReseauConvolution(int _nL, int _n, int _k, String nomfichier){
     	this.donneeIris = new FullDonnee(nomfichier);
-    	this.donneeIrisfiltre = new ArrayList<IrisDonnee>(this.donneeIris.getDonnee().size());
+    	this.donneeIrisfiltre = new ArrayList<Donnee>(this.donneeIris.getDonnee().size());
         this.input = new Layer(_n);
         this.nL = _nL;
         this.n = _n;
@@ -48,11 +48,13 @@ public class ReseauConvolution {
         		System.out.println(this.output.getNeurone().get(i).weight[j]);
         	}
         }
+ 
         
         
     }
     
-    public void start(){
+    public void start(int apprentissage){
+    	
     	
     }
     
@@ -100,10 +102,9 @@ public class ReseauConvolution {
    
    public void appliquerFiltre(){
 	   for(int i = 0 ; i< this.donneeIris.getDonnee().size() ; i++){
-		   double tab[] = new double[2];
-		   tab[0] = this.filtre.firstfiltre(this.donneeIris.getDonnee().get(i).getCoordonnee());
-		   tab[1] = this.filtre.secondfiltre(this.donneeIris.getDonnee().get(i).getCoordonnee());
-		   IrisDonnee tmp = new IrisDonnee(this.donneeIris.getDonnee().get(i).getClasse(), tab);
+		   double tab[] = new double[this.donneeIris.getDonnee().size()];
+		   tab = this.filtre.applicationFiltre(this.donneeIris.getDonnee().get(i).getCoordonnee());
+		   Donnee tmp = new Donnee(this.donneeIris.getDonnee().get(i).getClasse(), tab);
 		   this.donneeIrisfiltre.add(tmp);
 	   }
    }

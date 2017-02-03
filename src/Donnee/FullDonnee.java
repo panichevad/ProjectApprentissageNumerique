@@ -12,7 +12,7 @@ import Knn.Knn;
 
 public class FullDonnee {
 	
-	protected ArrayList<IrisDonnee> donnee;
+	protected ArrayList<Donnee> donnee;
 	protected HashMap<String, Integer> classe = new HashMap<>();
 	
 	public FullDonnee(String nom){
@@ -72,7 +72,7 @@ public class FullDonnee {
 					this.classe.put(classe,i);
 					i++;
 				}
-				this.donnee.add(new IrisDonnee(classe, tmp));
+				this.donnee.add(new Donnee(classe, tmp));
 				ligne = in.readLine();
 			}
 			in.close();
@@ -83,7 +83,7 @@ public class FullDonnee {
 	}
 	
 
-	public ArrayList<IrisDonnee> getDonnee() {
+	public ArrayList<Donnee> getDonnee() {
 		return donnee;
 	}
 

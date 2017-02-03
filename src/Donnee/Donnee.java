@@ -1,11 +1,11 @@
 package Donnee;
 
-public class IrisDonnee {
+public class Donnee {
 	
 	protected String classe;
 	protected double[] coordonnee;
 	
-	public IrisDonnee(String classe, double[] coordonnee){
+	public Donnee(String classe, double[] coordonnee){
 		this.classe = classe;
 		this.coordonnee = coordonnee;
 	}
